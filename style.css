@@ -82,4 +82,11 @@ body {
         width: 80%; /* Adattato la larghezza del campo di input nome su dispositivi mobili */
         margin-bottom: 10px; /* Aggiunto margine inferiore su dispositivi mobili */
     }
+
+    /* Nuova regola per spostare il pulsante più in basso */
+    #startButton {
+        position: relative;
+        bottom: auto;
+        margin-top: 10px; /* Aggiunto margine superiore per spostare il pulsante più in basso */
+    }
 }
