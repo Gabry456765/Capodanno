@@ -37,13 +37,14 @@ body {
     border-radius: 5px;
     cursor: pointer;
     position: absolute;
-    bottom: 20px; /* Puoi regolare questa proprietà per posizionare il bottone all'interno del div */
+    bottom: 3px;
+    
 }
 #nameInput {
     padding: 10px;
     font-size: 16px;
     margin-bottom: 10px;
-    margin-top: 30px;
+    margin-top: 15px;
     border-radius: 30px;
 }
 #output {
