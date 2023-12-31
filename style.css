@@ -38,7 +38,9 @@ body {
     position: absolute;
     bottom: 20px; /* Aggiunto uno spazio di 20px dal fondo del div */
 }
+
 #nameInput {
+    width: 80%;
     padding: 10px;
     font-size: 16px;
     margin-bottom: 10px;
