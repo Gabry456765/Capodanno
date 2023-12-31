@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +13,68 @@
    <input type="text" id="nameInput" placeholder="Il tuo nome">
    <button id="startButton" onclick="startCustomFunction()">Invia un augurio!</button>
    <div id="output"></div>
+   <div id="fireworks"></div>
 
    <script>
+
+window.onload = function() {
+        startFireworks();
+      };
+
+      function startFireworks() {
+    particlesJS('fireworks', {
+        particles: {
+            number: {
+                value: 150,
+                density: {
+                    enable: true,
+                    value_area: 1000
+                }
+            },
+            color: {
+                value: ['#ffffff', '#ff0000', '#ffff00']
+            },
+            shape: {
+                type: 'circle',
+                stroke: {
+                    width: 0,
+                    color: '#000000'
+                },
+                polygon: {
+                    nb_sides: 6
+                }
+            },
+            opacity: {
+                value: 0.9,
+                random: false
+            },
+            size: {
+                value: 6,
+                random: true
+            },
+            line_linked: {
+                enable: false
+            },
+            move: {
+                enable: true,
+                speed: 8,
+                random: true,
+                straight: false,
+                out_mode: 'out'
+            }
+        },
+        interactivity: {
+            events: {
+                onhover: {
+                    enable: false
+                },
+                onclick: {
+                    enable: false
+                }
+            }
+        }
+    });
+}
 
 function startCustomFunction() {
     var name = document.getElementById("nameInput").value.trim();
