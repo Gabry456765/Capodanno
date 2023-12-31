@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Anno nuovo</title>
+</head>
+<body>
+   <h1 class="tit">Countdown Anno Nuovo!</h1> 
+   <div class="div" id="countdown"></div>
+   <input type="text" id="nameInput" placeholder="Il tuo nome">
+   <button id="startButton" onclick="startCustomFunction()">Invia un augurio!</button>
+   <div id="output"></div>
+
+   <script>
+
+function startCustomFunction() {
+    var link = encodeURIComponent(window.location.href);
+
+    var whatsappLink = "https://api.whatsapp.com/send?text=" + link;
+
+    // Apri il link di condivisione di WhatsApp
+    window.location.href = whatsappLink;
+}
+
+      // Funzione per aggiornare il countdown
+      function updateCountdown() {
+         // Data di fine countdown (puoi personalizzarla)
+         const countdownDate = new Date("January 1, 2024 00:00:00").getTime();
+
+         // Data corrente
+         const currentDate = new Date().getTime();
+
+         // Calcola la differenza tra la data di fine e la data corrente
+         const timeDifference = countdownDate - currentDate;
+
+         // Calcola ore, minuti e secondi
+         const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+         const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+         const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+         // Aggiorna il contenuto del div con il countdown
+         const countdownDiv = document.getElementById("countdown");
+         countdownDiv.innerHTML = `<h1 class="tit">${hours}h ${minutes}m ${seconds}s</h1>`;
+      }
+
+      function checkForMessage() {
+         var urlParams = new URLSearchParams(window.location.search);
+         var message = urlParams.get('message');
+
+         if (message) {
+            var outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = '<h1 class="tit">Messaggio: ' + decodeURIComponent(message) + '</h1>';
+         }
+      }
+
+
+      // Aggiorna il countdown ogni secondo
+      setInterval(updateCountdown, 1000);
+
+      // Chiamata iniziale per evitare un ritardo di un secondo all'inizio
+      updateCountdown();
+
+      checkForMessage();
+   </script>
+</body>
+</html>
