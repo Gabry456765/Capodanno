@@ -16,9 +16,17 @@
    <script>
 
 function startCustomFunction() {
-    var link = encodeURIComponent(window.location.href);
+    var name = document.getElementById("nameInput").value.trim();
 
-    var whatsappLink = "https://api.whatsapp.com/send?text=" + link;
+    if (name === "") {
+        alert("Inserisci il tuo nome prima di generare il link.");
+        return;
+    }
+
+    var message = encodeURIComponent(`${name} ti augura un buon capodanno!`);
+    var link = encodeURIComponent(window.location.href + '?message=' + message);
+
+    var whatsappLink = `https://api.whatsapp.com/send?text=${link}`;
 
     // Apri il link di condivisione di WhatsApp
     window.location.href = whatsappLink;
