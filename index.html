@@ -16,10 +16,12 @@
    <div id="fireworks"></div>
 
    <script>
+      window.onload = function() {
+            startFireworks();
+            updateCountdown();
+            checkForMessage();
+        };
 
-window.onload = function() {
-        startFireworks();
-      };
 
       function startFireworks() {
     particlesJS('fireworks', {
@@ -76,22 +78,39 @@ window.onload = function() {
     });
 }
 
-function startCustomFunction() {
-    var name = document.getElementById("nameInput").value.trim();
+function handleMessages() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const messages = urlParams.getAll('message');
 
-    if (name === "") {
-        alert("Inserisci il tuo nome prima di generare il link.");
-        return;
-    }
+            // Visualizza l'ultimo messaggio ricevuto nella classe "tit"
+            const titElement = document.querySelector('.tit');
 
-    var message = encodeURIComponent(`${name} ti augura un buon capodanno!`);
-    var link = encodeURIComponent(window.location.href + '?message=' + message);
+            if (messages.length > 0) {
+                const messageText = decodeURIComponent(messages[messages.length - 1]);
+                titElement.innerHTML = `<h1 class="tit">${messageText}</h1>`;
+            }
+        }
 
-    var whatsappLink = `https://api.whatsapp.com/send?text=${link}`;
+        function startCustomFunction() {
+            var name = document.getElementById("nameInput").value.trim();
 
-    // Apri il link di condivisione di WhatsApp
-    window.open(whatsappLink, '_blank');
-}
+            if (name === "") {
+                alert("Inserisci il tuo nome prima di generare il link.");
+                return;
+            }
+
+            var message = encodeURIComponent(`${name} ti augura un buon capodanno!`);
+            var link = encodeURIComponent(window.location.href.split('?')[0] + '?message=' + message);
+
+            var whatsappLink = `https://api.whatsapp.com/send?text=${link}`;
+
+            // Apri il link di condivisione di WhatsApp
+            window.open(whatsappLink, '_blank');
+
+            // Aggiorna la visualizzazione del messaggio
+            handleMessages();
+        }
+
 
       // Funzione per aggiornare il countdown
       function updateCountdown() {
@@ -115,14 +134,9 @@ function startCustomFunction() {
       }
 
       function checkForMessage() {
-         var urlParams = new URLSearchParams(window.location.search);
-         var message = urlParams.get('message');
-
-         if (message) {
-            var outputDiv = document.getElementById("output");
-            outputDiv.innerHTML = '<h1 class="tit">Messaggio: ' + decodeURIComponent(message) + '</h1>';
-         }
-      }
+            handleMessages(); // Chiamato all'avvio per verificare la presenza di messaggi
+        }
+   
 
 
       // Aggiorna il countdown ogni secondo
@@ -131,7 +145,7 @@ function startCustomFunction() {
       // Chiamata iniziale per evitare un ritardo di un secondo all'inizio
       updateCountdown();
 
-      checkForMessage();
+    
    </script>
 </body>
 </html>
