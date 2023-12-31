@@ -38,7 +38,6 @@ body {
     position: absolute;
     bottom: 20px; /* Aggiunto uno spazio di 20px dal fondo del div */
 }
-
 #nameInput {
     padding: 10px;
     font-size: 16px;
@@ -70,4 +69,15 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
+}
+@media (max-width: 600px) {
+    #startButton {
+        width: 80%; /* Adattato la larghezza su dispositivi mobili */
+        bottom: 10px; /* Ridotto lo spazio dal fondo del div su dispositivi mobili */
+    }
+
+    #nameInput {
+        width: 80%; /* Adattato la larghezza del campo di input nome su dispositivi mobili */
+        margin-bottom: 10px; /* Aggiunto margine inferiore su dispositivi mobili */
+    }
 }
