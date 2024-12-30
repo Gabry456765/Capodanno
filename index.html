@@ -9,11 +9,19 @@
 </head>
 <body>
    <h1 class="tit">Countdown Anno Nuovo!</h1> 
-   <div class="div" id="countdown"></div>
-   <input type="text" id="nameInput" placeholder="Il tuo nome">
-   <button id="startButton" onclick="startCustomFunction()">Invia un augurio!</button>
-   <div id="output"></div>
-   <div id="fireworks"></div>
+<div class="div" id="countdown"></div>
+<input type="text" id="nameInput" placeholder="Il tuo nome">
+<select id="shareService">
+    <option value="whatsapp">WhatsApp</option>
+    <option value="facebook">Facebook</option>
+    <option value="twitter">Twitter</option>
+    <option value="telegram">Telegram</option>
+    <option value="email">Email</option>
+</select>
+<button id="startButton" onclick="startCustomFunction()">Invia un augurio!</button>
+<div id="output"></div>
+<div id="fireworks"></div>
+
 
    <script>
       window.onload = function() {
@@ -92,24 +100,40 @@ function handleMessages() {
         }
 
         function startCustomFunction() {
-            var name = document.getElementById("nameInput").value.trim();
+    var name = document.getElementById("nameInput").value.trim();
 
-            if (name === "") {
-                alert("Inserisci il tuo nome prima di generare il link.");
-                return;
-            }
+    if (name === "") {
+        alert("Inserisci il tuo nome prima di generare il link.");
+        return;
+    }
 
-            var message = encodeURIComponent(`${name} ti augura un buon capodanno!`);
-            var link = encodeURIComponent(window.location.href.split('?')[0] + '?message=' + message);
+    var message = encodeURIComponent(`${name} ti augura un buon capodanno!`);
+    var link = encodeURIComponent(window.location.href.split('?')[0] + '?message=' + message);
 
-            var whatsappLink = `https://api.whatsapp.com/send?text=${link}`;
+    // Ottieni il servizio di condivisione selezionato
+    var shareService = document.getElementById("shareService").value;
+    var shareUrl = "";
 
-            // Apri il link di condivisione di WhatsApp
-            window.open(whatsappLink, '_blank');
+    // Determina l'URL di condivisione in base al servizio selezionato
+    if (shareService === "whatsapp") {
+        shareUrl = `https://api.whatsapp.com/send?text=${link}`;
+    } else if (shareService === "facebook") {
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${link}`;
+    } else if (shareService === "twitter") {
+        shareUrl = `https://twitter.com/intent/tweet?text=${message}&url=${link}`;
+    } else if (shareService === "telegram") {
+        shareUrl = `https://t.me/share/url?url=${link}&text=${message}`;
+    } else if (shareService === "email") {
+        shareUrl = `mailto:?subject=Augurio di Capodanno&body=${message} %0A ${link}`;
+    }
 
-            // Aggiorna la visualizzazione del messaggio
-            handleMessages();
-        }
+    // Apri il link di condivisione
+    window.open(shareUrl, '_blank');
+
+    // Aggiorna la visualizzazione del messaggio
+    handleMessages();
+}
+
 
 
       // Funzione per aggiornare il countdown
