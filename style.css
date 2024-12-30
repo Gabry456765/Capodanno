@@ -90,3 +90,10 @@ body {
         margin-top: 10px; /* Aggiunto margine superiore per spostare il pulsante più in basso */
     }
 }
+#shareService {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
